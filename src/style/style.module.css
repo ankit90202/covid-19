@@ -1,0 +1,80 @@
+:root {
+  --prime-color: #fd322f;
+  --gray-color: #c3c4c6;
+  --black-color: #000;
+}
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none !important;
+}
+
+body {
+  padding: 10px;
+}
+img {
+  max-width: 100%;
+}
+
+svg {
+  max-width: 100%;
+}
+
+.App {
+  background: #fff;
+  padding: 20px;
+}
+.App .cus-row {
+  margin: 0;
+}
+
+.br {
+  border-radius: 7px;
+}
+
+.App > .row > div[class^="col-"] {
+  padding: 0;
+}
+
+.Navbar {
+  background: #fff;
+  border-radius: 7px;
+}
+
+.Navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.Navbar ul li {
+  width: 100%;
+}
+
+.Navbar ul li a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  transition: all 0.5s;
+  color: var(--gray-color);
+}
+.Navbar ul li a i {
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.Navbar ul li a:hover {
+  color: var(--black-color);
+}
+.Navbar ul li a:hover i {
+}
+
+/* Home page style start  */
