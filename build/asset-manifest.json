@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.965f3c25.chunk.css",
+    "main.js": "/static/js/main.10e48b3a.chunk.js",
+    "main.js.map": "/static/js/main.10e48b3a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.25917a94.js",
+    "runtime-main.js.map": "/static/js/runtime-main.25917a94.js.map",
+    "static/css/2.401dc1b8.chunk.css": "/static/css/2.401dc1b8.chunk.css",
+    "static/js/2.9ad27d51.chunk.js": "/static/js/2.9ad27d51.chunk.js",
+    "static/js/2.9ad27d51.chunk.js.map": "/static/js/2.9ad27d51.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.d941e577bfb393927d7df4ac6f43b6c2.js": "/precache-manifest.d941e577bfb393927d7df4ac6f43b6c2.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.401dc1b8.chunk.css.map": "/static/css/2.401dc1b8.chunk.css.map",
+    "static/css/main.965f3c25.chunk.css.map": "/static/css/main.965f3c25.chunk.css.map",
+    "static/js/2.9ad27d51.chunk.js.LICENSE.txt": "/static/js/2.9ad27d51.chunk.js.LICENSE.txt",
+    "static/media/font-awesome.css": "/static/media/fontawesome-webfont.fee66e71.woff",
+    "static/media/journey.svg": "/static/media/journey.6494b939.svg",
+    "static/media/loading.gif": "/static/media/loading.b8c03eb9.gif",
+    "static/media/logo.svg": "/static/media/logo.dabc6114.svg",
+    "static/media/patient.svg": "/static/media/patient.6cb458f4.svg",
+    "static/media/pin.svg": "/static/media/pin.b791b5a5.svg",
+    "static/media/support.svg": "/static/media/support.91cdacd6.svg",
+    "static/media/world.svg": "/static/media/world.67a5203a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.25917a94.js",
+    "static/css/2.401dc1b8.chunk.css",
+    "static/js/2.9ad27d51.chunk.js",
+    "static/css/main.965f3c25.chunk.css",
+    "static/js/main.10e48b3a.chunk.js"
+  ]
+}
