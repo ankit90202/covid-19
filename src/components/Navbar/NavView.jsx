@@ -16,7 +16,7 @@ const NavView = ({ pages }) => {
   const page = pages.map((page) => (
     <li key={page.id}>
       <Link to={page.link}>
-        <img src={page.icon} />
+        <img src={page.icon} alt={'nav'} />
         <div className="navname"> {page.name}</div>
       </Link>
     </li>

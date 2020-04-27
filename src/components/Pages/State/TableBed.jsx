@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import fp from 'lodash/fp'
+import React from "react";
 import styled from "styled-components";
 
 const StyledTable = styled.div`
@@ -21,15 +22,33 @@ const StyledTable = styled.div`
   }
 `;
 
-const TableBedSummary = ({ beds, heading }) => {
-  const tableHead = heading.map((item) => <th key={item.id}>{item.name}</th>);
-  const [bed, setBed] = useState({});
+const getTableBody = (data, heading) => {
 
-  useEffect(() => {
-    if (beds) {
-      setBed(beds);
-    }
-  }, [beds]);
+  if (fp.isArray(data)) {
+
+    return fp.map(item => (
+      <tr key={item.state}>
+        {fp.map(({ className, key }) => {
+
+          return <td key={key} className={className}>{item[key]}</td>
+        }, heading)}
+      </tr>
+    ), data)
+  }
+
+  return (
+    <tr>{fp.map(({ className, key }) => {
+
+      return <td key={key} className={className}>{data[key]}</td>
+    }, heading)}</tr>
+  );
+}
+
+const TableBedSummary = ({ body, heading }) => {
+
+  const tableHead = fp.map(item => <th key={item.key}>{item.name}</th>, heading);
+  const tableBody = getTableBody(body, heading)
+
   return (
     <StyledTable className="table-responsive text-center">
       <table className="table table-borderless">
@@ -37,14 +56,8 @@ const TableBedSummary = ({ beds, heading }) => {
           <tr>{tableHead}</tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{bed.ruralHospitals}</td>
-            <td>{bed.ruralBeds}</td>
-            <td>{bed.urbanHospitals}</td>
-            <td>{bed.urbanBeds}</td>
-            <td className="font-weight-bold">{bed.totalHospitals}</td>
-            <td className="font-weight-bold">{bed.totalBeds}</td>
-          </tr>
+          {heading.map}
+          {tableBody}
         </tbody>
       </table>
     </StyledTable>
