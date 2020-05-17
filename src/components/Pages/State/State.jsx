@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { DataContext } from "../../../context/DataContext";
 import Loader from "../../common/Loader";
 import styled from "styled-components";
@@ -18,15 +18,16 @@ const StyledRow = styled.div`
   }
 `;
 
+const tableHeading = [
+  { id: "1", name: "State" },
+  { id: "2", name: "Total Confirmed" },
+  { id: "3", name: "Total Death" },
+  { id: "4", name: "Total Recoverd" },
+  { id: "5", name: "New Foreign Cases" },
+];
+
 const State = () => {
   const { states, loading } = useContext(DataContext);
-  const [tableHeading, setTableHeading] = useState([
-    { id: "1", name: "State" },
-    { id: "2", name: "Total Confirmed" },
-    { id: "3", name: "Total Death" },
-    { id: "4", name: "Total Recoverd" },
-    { id: "5", name: "New Foreign Cases" },
-  ]);
 
   if (loading) return <Loader />;
   return (

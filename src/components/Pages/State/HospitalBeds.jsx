@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
+import fp from 'lodash/fp'
 import { DataContext } from "../../../context/DataContext";
 import styled from "styled-components";
 import Loader from "../../common/Loader";
-import TableBedSummary from "./TableBed";
-import TableBedRegional from "./TableBedRegional";
-import { Link } from "react-router-dom";
+import TableBed from "./TableBed";
 
 const StyledRow = styled.div`
   margin-bottom: 20px;
@@ -24,32 +23,29 @@ const StyledRow = styled.div`
   }
 `;
 
+const getLastUpdatedOn = fp.flow(
+  fp.getOr([], 'sources.[0].lastUpdated'),
+  fp.split('T'),
+  fp.head
+)
+
+const summayrheading = [
+  { key: 'ruralHospitals', name: "Rural Hospitals" },
+  { key: 'ruralBeds', name: "Rural Beds" },
+  { key: 'urbanHospitals', name: "Urban Hospitals" },
+  { key: 'urbanBeds', name: "Urban Beds" },
+  { className: 'font-weight-bold', key: 'totalHospitals', name: "Total Hospitals" },
+  { className: 'font-weight-bold', key: 'totalBeds', name: "Total Beds" },
+];
+
+const regionalheading = [
+  { className: 'font-weight-bold', key: 'state', name: "State Name" },
+  ...summayrheading
+];
+
 const HospitalBeds = () => {
   const { bed, loading } = useContext(DataContext);
-  let updatedOn;
-  let url;
-  if (bed.sources) {
-    updatedOn = bed.sources[0].lastUpdated.split("T")[0];
-    url = bed.sources[0].url;
-  }
-  
-  const [summayrheading, setSummaryHeading] = useState([
-    { id: 1, name: "Rural Hospitals" },
-    { id: 2, name: "Rural Beds" },
-    { id: 3, name: "Urban Hospitals" },
-    { id: 4, name: "Urban Beds" },
-    { id: 5, name: "Total Hospitals" },
-    { id: 6, name: "Total Beds" },
-  ]);
-  const [regionalheading, setregionalheading] = useState([
-    { id: 1, name: "State Name" },
-    { id: 2, name: "Rural Hospitals" },
-    { id: 3, name: "Rural Beds" },
-    { id: 4, name: "Urban Hospitals" },
-    { id: 5, name: "Urban Beds" },
-    { id: 6, name: "Total Hospitals" },
-    { id: 7, name: "Total Beds" },
-  ]);
+  const url = fp.getOr('', 'sources.[0].url', bed);
 
   if (loading) return <Loader />;
 
@@ -66,7 +62,7 @@ const HospitalBeds = () => {
         <StyledRow className="row mb-4">
           <div className="col-md-12">
             <div className="cus-white">
-              <TableBedSummary beds={bed.summary} heading={summayrheading} />
+              <TableBed body={bed.summary || {}} heading={summayrheading} />
             </div>
           </div>
         </StyledRow>
@@ -80,7 +76,7 @@ const HospitalBeds = () => {
         <StyledRow className="row mb-4">
           <div className="col-md-12">
             <div className="cus-white">
-              <TableBedRegional regional={bed.regional} regionalheading={regionalheading} />
+              <TableBed body={bed.regional || []} heading={regionalheading} />
             </div>
           </div>
         </StyledRow>
@@ -89,7 +85,7 @@ const HospitalBeds = () => {
             <div className="cus-white">
               <div className="d-flex w-100 justify-content-between align-items-center">
                 <h1 className="h4 m-0 font-weight-bold">Last Updated On</h1>
-                <p className="m-0">{updatedOn}</p>
+                <p className="m-0">{getLastUpdatedOn(bed)}</p>
                 <a href={url} className="source">
                   Source
                 </a>

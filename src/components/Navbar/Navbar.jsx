@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import NavView from "./NavView";
 import classes from "../../style/style.module.css";
 import logo from "../../utils/logo.svg";
@@ -32,14 +32,16 @@ const StyledTitle = styled.h2`
   font-weight: bold;
 `;
 
+const NAV_BAR = [
+  { id: 1, name: "World", link: "/", icon: world },
+  { id: 2, name: "India", link: "/world/country/india/India", icon: pin },
+  { id: 3, name: "Indian State", link: "/india-state", icon: journey },
+  { id: 4, name: "Hospital Beds", link: "/india/hospital-beds", icon: patient },
+  { id: 5, name: "Resources", link: "/resources", icon: support },
+]
+
 const Navbar = () => {
-  const [navbar, setNavbar] = useState([
-    { id: 1, name: "World", link: "/", icon: world },
-    { id: 2, name: "India", link: "/world/country/india/India", icon: pin },
-    { id: 3, name: "Indian State", link: "/india-state", icon: journey },
-    { id: 4, name: "Hospital Beds", link: "/india/hospital-beds", icon: patient },
-    { id: 5, name: "Resources", link: "/resources", icon: support },
-  ]);
+
   return (
     <div className={classes.Navbar}>
       <StyledLogoWrapper className="logo-wrapper">
@@ -48,7 +50,7 @@ const Navbar = () => {
           <StyledTitle>Covid</StyledTitle>
         </Link>
       </StyledLogoWrapper>
-      <NavView pages={navbar} />
+      <NavView pages={NAV_BAR} />
     </div>
   );
 };

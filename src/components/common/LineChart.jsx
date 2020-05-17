@@ -20,9 +20,7 @@ const LineChart = ({ data }) => {
   }
 
   return (
-    <div>
       <Bar data={dataInfo} width={100} height={50} options={{ maintainAspectRatio: true }} />
-    </div>
   );
 };
 

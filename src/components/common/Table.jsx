@@ -1,4 +1,5 @@
 import React from "react";
+import fp from 'lodash/fp'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -22,19 +23,30 @@ const StyledTable = styled.div`
   }
 `;
 
+const TABLE_HEAD = [
+  'Country',
+  'Total Confirmed',
+  'Total Death',
+  'Total Recovered',
+  'New Confirmed',
+  'New Deaths',
+  'New Recovered'
+]
+
+const TABLE_DATA = [{
+  className: 'font-weight-bold',
+  children: ({ Slug, Country }) => <Link to={`world/country/${Slug}/${Country}`}>{Country}</Link>
+},
+...fp.map(children => ({ className: '', children: item => item[children.replace(' ', '')] }), fp.tail(TABLE_HEAD))
+]
+
 const Table = ({ country }) => {
+  
   const countryRow = country.map((item, i) => (
     <tr key={item.CountryCode} data-href={item.CountryCode}>
-      {/* <td>{i}</td> */}
-      <td className="font-weight-bold">
-        <Link to={`world/country/${item.Slug}/${item.Country}`}>{item.Country}</Link>
-      </td>
-      <td>{item.TotalConfirmed}</td>
-      <td>{item.TotalDeaths}</td>
-      <td>{item.TotalRecovered}</td>
-      <td>{item.NewConfirmed}</td>
-      <td>{item.NewDeaths}</td>
-      <td>{item.NewRecovered}</td>
+      {TABLE_DATA.map(({ children, className }, index) => {
+        return <td key={`${index}-table-data`} className={className} children={children(item)} />
+      })}
     </tr>
   ));
 
@@ -43,14 +55,7 @@ const Table = ({ country }) => {
       <table className="table table-borderless">
         <thead>
           <tr>
-            {/* <th>#</th> */}
-            <th>Country</th>
-            <th>Total Confirmed</th>
-            <th>Total Death</th>
-            <th>Total Recoverd</th>
-            <th>New Confirmed</th>
-            <th>New Death</th>
-            <th>New Recoverd</th>
+            {TABLE_HEAD.map((title, index) => <th key={`${index}-table-head`} children={title} />)}
           </tr>
         </thead>
         <tbody>{countryRow}</tbody>
